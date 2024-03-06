@@ -1,0 +1,17 @@
+services:
+  api:
+    image: oven/bun:alpine
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - .:/app
+    command: "bun run --watch /app/index.js"
+  imgproxy:
+    image: darthsim/imgproxy
+    environment:
+      - IMGPROXY_ENABLE_WEBP_DETECTION=true
+      - IMGPROXY_JPEG_PROGRESSIVE=true
+      - IMGPROXY_USE_ETAG=true

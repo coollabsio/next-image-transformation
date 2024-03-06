@@ -1,0 +1,11 @@
+{
+  "name": "dynamic-image-resizer",
+  "module": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --watch ./index.js",
+    "start": "bun run ./index.js"
+  },
+  "devDependencies": {},
+  "peerDependencies": {}
+}

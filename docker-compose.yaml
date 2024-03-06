@@ -1,0 +1,24 @@
+services:
+  api:
+    image: ghcr.io/coollabsio/dynamic-image-resizer
+    ports:
+      - "3000"
+    environment:
+      - NODE_ENV=production
+      - ALLOWED_REMOTE_DOMAINS=example.com
+    healthcheck:
+      test: "wget -qO- http://localhost:3000/health || exit 1"
+      interval: 2s
+      timeout: 10s
+      retries: 5
+  imgproxy:
+    image: darthsim/imgproxy
+    environment:
+      - IMGPROXY_ENABLE_WEBP_DETECTION=true
+      - IMGPROXY_JPEG_PROGRESSIVE=true
+      - IMGPROXY_USE_ETAG=true
+    healthcheck:
+      test: [ "CMD", "imgproxy", "health" ]
+      interval: 2s
+      timeout: 10s
+      retries: 5
