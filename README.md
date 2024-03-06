@@ -2,6 +2,14 @@
 
 It is a drop-in replacement for resizing images with Next.js used in \<Image> component from `next/image`: https://nextjs.org/docs/pages/api-reference/components/image
 
+## Try it out 
+
+- Change the `width` query parameter to see the image resize on the fly.
+- Add the `height` query parameter to see the image crop on the fly.
+- Add the `quality` query parameter to see the image quality change on the fly.
+
+https://image.coollabs.io/image/https://cdn.coollabs.io/assets/coolify/og-image-v4.png?width=50
+
 ## Includes
 1. Next Image Transformation API.
    - A simple API written in Bun that transforms the incoming request to Imgproxy format and forwards it to the Imgproxy service.
@@ -36,6 +44,9 @@ export default function myImageLoader({ src, width, quality }) {
 
 Replace `<domain>` with the URL of what you set on the `Next Image Transformation API`.
 
+## Manually try it out
+
+https://<domain>/image/https://cdn.coollabs.io/assets/coolify/og-image-v4.png?width=500
 
 ## Currently supported transformations
 - width
