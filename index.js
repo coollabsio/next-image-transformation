@@ -17,7 +17,7 @@ async function resize(url) {
     const preset = "pr:sharp"
     const src = url.pathname.split("/").slice(2).join("/");
     const origin = new URL(src).hostname;
-    if (allowedDomains.includes("*") && !allowedDomains.includes(origin)) {
+    if (!allowedDomains.includes("*") && !allowedDomains.includes(origin)) {
         return new Response(`Domain (${origin}) not allowed. More details here: https://github.com/coollabsio/next-image-transformation`, { status: 403 });
     }
     const width = url.searchParams.get("width") || 0;
