@@ -16,7 +16,7 @@ async function resize(url) {
     const src = url.pathname.split("/").slice(2).join("/");
     const origin = new URL(src).hostname;
     if (!allowedDomains.includes(origin)) {
-        return new Response("Domain not allowed", { status: 403 });
+        return new Response("Domain not allowed. More details here: https://github.com/coollabsio/next-image-transformation", { status: 403 });
     }
     const width = url.searchParams.get("width") || 0;
     const height = url.searchParams.get("height") || 0;
