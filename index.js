@@ -6,7 +6,7 @@ Bun.serve({
             return new Response("OK");
         };
         if (url.pathname.startsWith("/image/")) return await resize(url);
-        return Response.redirect("/", 302);
+        return Response.redirect("https://github.com/coollabsio/next-image-transformation", 302);
     }
 });
 
