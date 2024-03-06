@@ -6,7 +6,7 @@ on:
   
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: "coollabsio/dynamic-image-resizer"
+  IMAGE_NAME: "coollabsio/next-image-transformation"
 
 jobs:
   amd64:
