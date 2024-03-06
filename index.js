@@ -1,10 +1,19 @@
-const allowedDomains = process.env.ALLOWED_REMOTE_DOMAINS.split(",") || ["*"];
-const imgproxyUrl = process.env.IMGPROXY_URL || "http://imgproxy:8080";
-
+const allowedDomains = process?.env?.ALLOWED_REMOTE_DOMAINS.split(",") || ["*"];
+const imgproxyUrl = process?.env?.IMGPROXY_URL || "http://imgproxy:8080";
+const version = "0.0.2"
 Bun.serve({
     port: 3000,
     async fetch(req) {
         const url = new URL(req.url);
+        if (url.pathname === "/") {
+            return new Response(`<h3>Next Image Transformation v${version}</h3>More info <a href="https://github.com/coollabsio/next-image-transformation">https://github.com/coollabsio/next-image-transformation</a>.`, {
+                headers: {
+                    "Content-Type": "text/html",
+                },
+            });
+        }
+
+
         if (url.pathname === "/health") {
             return new Response("OK");
         };

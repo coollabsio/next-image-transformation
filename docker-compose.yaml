@@ -12,6 +12,9 @@ services:
       interval: 2s
       timeout: 10s
       retries: 5
+    depends_on:
+      imgproxy:
+        condition: service_healthy
   imgproxy:
     image: darthsim/imgproxy
     environment:
