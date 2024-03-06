@@ -5,7 +5,8 @@ services:
       - "3000"
     environment:
       - NODE_ENV=production
-      - ALLOWED_REMOTE_DOMAINS=example.com
+      - ALLOWED_REMOTE_DOMAINS=*
+      - IMGPROXY_URL=http://imgproxy:8080
     healthcheck:
       test: "wget -qO- http://localhost:3000/health || exit 1"
       interval: 2s

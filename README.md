@@ -1,12 +1,17 @@
-# Dynamic Image Resizer
+# Next.js Image Transformation
 
 It is a drop-in replacement for resizing images with Next.js used in \<Image> component from `next/image`: https://nextjs.org/docs/pages/api-reference/components/image
 
-## How to deploy
-1. Clone the repository
-2. Copy `.env.example` to `.env` and fill in the environment variables.
-3. Run `docker compose up -d`
-5. Use a reverse proxy to expose the service (port `3000`) to the internet.
+## Includes
+1. Next Image Transformation API.
+2. Imgproxy service.
+
+## How to deploy with Coolify
+1. Login to your [Coolify](https://coolify.io) instance.
+2. Create a new service and select the `Next.js Image Transformation` template.
+3. Optional: Set the `ALLOWED_REMOTE_DOMAINS` environment variable to the domain of your images (e.g. `example.com,coolify.io`). By default, it is set to `*` which allows any domain.
+4. Set the your `<domain>` on the `Next Image Transformation` service.
+5. Deploy your service.
 
 ## How to use
 1. In next.config.js add the following:
@@ -23,9 +28,9 @@ module.exports = {
 'use client'
  
 export default function myImageLoader({ src, width, quality }) {
-  return `https://example.com/image/${src}?w=${width}&q=${quality || 75}`
+  return `https://<domain>/image/${src}?w=${width}&q=${quality || 75}`
 }
 ```
 
-Replace `https://example.com/` with the URL of your own.
+Replace `<domain>` with the URL of what you set on the `Next Image Transformation API`.
 
