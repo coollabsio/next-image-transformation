@@ -1,6 +1,6 @@
 services:
   api:
-    image: ghcr.io/coollabsio/dynamic-image-resizer
+    image: ghcr.io/coollabsio/next-image-transformation
     ports:
       - "3000"
     environment:
