@@ -44,10 +44,6 @@ export default function myImageLoader({ src, width, quality }) {
 
 Replace `<domain>` with the URL of what you set on the `Next Image Transformation API`.
 
-## Manually try it out
-
-https://<domain>/image/https://cdn.coollabs.io/assets/coolify/og-image-v4.png?width=500
-
 ## Currently supported transformations
 - width
 - height
