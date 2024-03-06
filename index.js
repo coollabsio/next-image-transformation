@@ -1,4 +1,4 @@
-const allowedDomains = process.env.ALLOWED_REMOTE_DOMAINS.split(",") || "*";
+const allowedDomains = process.env.ALLOWED_REMOTE_DOMAINS.split(",") || ["*"];
 const imgproxyUrl = process.env.IMGPROXY_URL || "http://imgproxy:8080";
 
 Bun.serve({
@@ -17,8 +17,8 @@ async function resize(url) {
     const preset = "pr:sharp"
     const src = url.pathname.split("/").slice(2).join("/");
     const origin = new URL(src).hostname;
-    if (allowedDomains !== "*" && !allowedDomains.includes(origin)) {
-        return new Response("Domain not allowed. More details here: https://github.com/coollabsio/next-image-transformation", { status: 403 });
+    if (allowedDomains.includes("*") && !allowedDomains.includes(origin)) {
+        return new Response(`Domain (${origin}) not allowed. More details here: https://github.com/coollabsio/next-image-transformation`, { status: 403 });
     }
     const width = url.searchParams.get("width") || 0;
     const height = url.searchParams.get("height") || 0;
