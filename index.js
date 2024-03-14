@@ -1,10 +1,11 @@
 const version = "0.0.3"
 
-const allowedDomains = process?.env?.ALLOWED_REMOTE_DOMAINS?.split(",") || ["*"];
+let allowedDomains = process?.env?.ALLOWED_REMOTE_DOMAINS?.split(",") || ["*"];
 let imgproxyUrl = process?.env?.IMGPROXY_URL || "http://imgproxy:8080";
 if (process.env.NODE_ENV === "development") {
     imgproxyUrl = "http://localhost:8888"
 }
+allowedDomains = allowedDomains.map(d => d.trim());
 
 Bun.serve({
     port: 3000,
@@ -30,7 +31,13 @@ async function resize(url) {
     const preset = "pr:sharp"
     const src = url.pathname.split("/").slice(2).join("/");
     const origin = new URL(src).hostname;
-    if (!allowedDomains.includes("*") && !allowedDomains.includes(origin)) {
+    const allowed = allowedDomains.filter(domain => {
+        if (domain === "*") return true;
+        if (domain === origin) return true;
+        if (domain.startsWith("*.") && origin.endsWith(domain.split("*.").pop())) return true;
+        return false;
+    })
+    if (allowed.length === 0) {
         return new Response(`Domain (${origin}) not allowed. More details here: https://github.com/coollabsio/next-image-transformation`, { status: 403 });
     }
     const width = url.searchParams.get("width") || 0;
