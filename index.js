@@ -1,6 +1,8 @@
-const allowedDomains = process?.env?.ALLOWED_REMOTE_DOMAINS.split(",") || ["*"];
+const version = "0.0.3"
+
+const allowedDomains = process?.env?.ALLOWED_REMOTE_DOMAINS?.split(",") || ["*"];
 const imgproxyUrl = process?.env?.IMGPROXY_URL || "http://imgproxy:8080";
-const version = "0.0.2"
+
 Bun.serve({
     port: 3000,
     async fetch(req) {
@@ -12,7 +14,6 @@ Bun.serve({
                 },
             });
         }
-
 
         if (url.pathname === "/health") {
             return new Response("OK");
@@ -33,8 +34,12 @@ async function resize(url) {
     const height = url.searchParams.get("height") || 0;
     const quality = url.searchParams.get("quality") || 75;
     try {
-        const url = `${imgproxyUrl}/${preset}/resize:fill:${width}:${height}/q:${quality}/plain/${src}@webp`
-        const image = await fetch(url)
+        const url = `${imgproxyUrl}/${preset}/resize:fill:${width}:${height}/q:${quality}/plain/${src}`
+        const image = await fetch(url , {
+            headers: {
+                "Accept": "image/avif,image/webp,image/*,",
+            }
+        })
         const headers = new Headers(image.headers);
         headers.set("Server", "NextImageTransformation");
         return new Response(image.body, {

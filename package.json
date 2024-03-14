@@ -7,5 +7,6 @@
     "start": "bun run ./index.js"
   },
   "devDependencies": {},
-  "peerDependencies": {}
+  "peerDependencies": {},
+  "dependencies": {}
 }

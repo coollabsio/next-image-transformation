@@ -1,19 +1,11 @@
 services:
-  # api:
-  #   image: oven/bun:alpine
-  #   working_dir: /app
-  #   ports:
-  #     - "3000:3000"
-  #   environment:
-  #     - NODE_ENV=development
-  #   volumes:
-  #     - .:/app
-  #   command: "bun run --watch /app/index.js"
   imgproxy:
     image: darthsim/imgproxy
     ports:
       - "8888:8080"
     environment:
       - IMGPROXY_ENABLE_WEBP_DETECTION=true
+      - IMGPROXY_ENABLE_AVIF_DETECTION=true
+      - IMGPROXY_PREFERRED_FORMATS=webp,avif,jpeg,png,gif
       - IMGPROXY_JPEG_PROGRESSIVE=true
       - IMGPROXY_USE_ETAG=true
