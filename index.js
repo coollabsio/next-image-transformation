@@ -1,7 +1,10 @@
 const version = "0.0.3"
 
 const allowedDomains = process?.env?.ALLOWED_REMOTE_DOMAINS?.split(",") || ["*"];
-const imgproxyUrl = process?.env?.IMGPROXY_URL || "http://imgproxy:8080";
+let imgproxyUrl = process?.env?.IMGPROXY_URL || "http://imgproxy:8080";
+if (process.env.NODE_ENV === "development") {
+    imgproxyUrl = "http://localhost:8888"
+}
 
 Bun.serve({
     port: 3000,
@@ -35,9 +38,9 @@ async function resize(url) {
     const quality = url.searchParams.get("quality") || 75;
     try {
         const url = `${imgproxyUrl}/${preset}/resize:fill:${width}:${height}/q:${quality}/plain/${src}`
-        const image = await fetch(url , {
+        const image = await fetch(url, {
             headers: {
-                "Accept": "image/avif,image/webp,image/*,",
+                "Accept": "image/avif,image/webp,image/apng,*/*",
             }
         })
         const headers = new Headers(image.headers);
