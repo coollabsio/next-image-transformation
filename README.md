@@ -39,17 +39,25 @@ module.exports = {
 
 export default function myImageLoader({ src, width, quality }) {
     const isLocal = !src.startsWith('http');
+    const query = new URLSearchParams();
+
+    const imageOptimizationApi = '<image-optimization-domain>';
+    // Your NextJS application URL
+    const baseUrl = '<your-nextjs-app-domain>';
+
+    const fullSrc = `${baseUrl}${src}`;
+
+    if (width) query.set('width', width);
+    if (quality) query.set('quality', quality);
+
     if (isLocal && process.env.NODE_ENV === 'development') {
         return src;
     }
     if (isLocal) {
-        const baseUrl = 'https://<your-nextjs-app-domain>';
-        const fullSrc = `${baseUrl}${src}`;
-        return `https://<image-optimization-domain>/o/${fullSrc}?width=${width}&quality=${quality || 75}`
+        return `${imageOptimizationApi}/${fullSrc}?${query.toString()}`;
     }
-    return `https://<image-optimization-domain>/o/${src}?width=${width}&quality=${quality|| 75}`
+    return `${imageOptimizationApi}/${src}?${query.toString()}`;
 }
-
 ```
 
 - Replace `<image-optimization-domain>` with the URL of what you set on the `Next Image Transformation API`.
