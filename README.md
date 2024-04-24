@@ -1,6 +1,6 @@
-# Next.js Image Transformation
+# Next.js Image Optimization
 
-It is a drop-in replacement for resizing images with Next.js used in \<Image> component from `next/image`: https://nextjs.org/docs/pages/api-reference/components/image
+An open-source & self-hostable image optimization service, a drop-in replacement for Vercel's Image Optimization.
 
 ## Try it out 
 
@@ -8,7 +8,7 @@ It is a drop-in replacement for resizing images with Next.js used in \<Image> co
 - Add the `height` query parameter to see the image crop on the fly.
 - Add the `quality` query parameter to see the image quality change on the fly.
 
-https://image.coollabs.io/image/https://cdn.coollabs.io/assets/coolify/og-image-v4.png?width=50
+https://image.coollabs.io/image/https://cdn.coollabs.io/images/image1.jpg?width=500
 
 ## Includes
 1. Next Image Transformation API.
