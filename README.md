@@ -36,13 +36,24 @@ module.exports = {
 2. Create a file called `loader.js` in the root of your project and add the following:
 ```javascript
 'use client'
- 
+
 export default function myImageLoader({ src, width, quality }) {
-  return `https://<domain>/image/${src}?w=${width}&q=${quality || 75}`
+    const isLocal = !src.startsWith('http');
+    if (isLocal && process.env.NODE_ENV === 'development') {
+        return src;
+    }
+    if (isLocal) {
+        const baseUrl = 'https://<your-nextjs-app-domain>';
+        const fullSrc = `${baseUrl}${src}`;
+        return `https://<image-optimization-domain>/o/${fullSrc}?width=${width}&quality=${quality || 75}`
+    }
+    return `https://<image-optimization-domain>/o/${src}?width=${width}&quality=${quality|| 75}`
 }
+
 ```
 
-Replace `<domain>` with the URL of what you set on the `Next Image Transformation API`.
+- Replace `<image-optimization-domain>` with the URL of what you set on the `Next Image Transformation API`.
+- Replace `<your-nextjs-app-domain>` with the URL of your Nextjs application.
 
 ## Currently supported transformations
 - width
