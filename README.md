@@ -1,6 +1,10 @@
-# Next.js Image Optimization
+# Next.js Image Transformation
 
 An open-source & self-hostable image optimization service, a drop-in replacement for Vercel's Image Optimization.
+
+## Cloud with free global CDN
+
+The cloud version, with free global CDN and simple pricing available here: https://images.coollabs.io
 
 ## Try it out 
 
