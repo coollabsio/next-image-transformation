@@ -58,9 +58,9 @@ export default function myImageLoader({ src, width, quality }) {
         return src;
     }
     if (isLocal) {
-        return `${imageOptimizationApi}/${fullSrc}?${query.toString()}`;
+        return `${imageOptimizationApi}/image/${fullSrc}?${query.toString()}`;
     }
-    return `${imageOptimizationApi}/${src}?${query.toString()}`;
+    return `${imageOptimizationApi}/image/${src}?${query.toString()}`;
 }
 ```
 
